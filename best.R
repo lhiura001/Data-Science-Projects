@@ -4,19 +4,19 @@ best <- function(state, outcome){
   
   outcome <- read.csv("C:/Users/Luke/OneDrive/Desktop/rprog_data_ProgAssignment3-data (2)/outcome-of-care-measures.csv", colClasses = "character")
   
-  state = "TX"
+ 
  
   ## insert directory of the csv location
   ## Read the outcome data
   
   #Extracting columns of interest: heart attack, heart failure, pneumonia, states, Hospital.Name
-  interest <- as.data.frame(cbind(outcome[,2], outcome[,7], outcome[,11], outcome[,17], outcome[,23]))
-  colnames(interest) <- c("Hospital.Name", "states", "heart attack","heart failure", "pneumonia")
+  poi <- as.data.frame(cbind(outcome[,2], outcome[,7], outcome[,11], outcome[,17], outcome[,23]))
+  colnames(poi) <- c("Hospital.Name", "states", "heart attack","heart failure", "pneumonia")
   
   ## Check that state and outcome are valid
-   outcome = "heart attack"
+  
    
-  if(!state %in% interest[,"states"]){
+  if(!state %in% poi[,"states"]){
     stop('Invalid State')
   }
   
@@ -37,7 +37,8 @@ best <- function(state, outcome){
   inst <- na.omit(inst)
 
    
-  hospital <- intereststate[intereststate[,outcome] == min(intereststate[,outcome]),1]
+  hospital <- inst[inst[,outcome] == min(inst[,outcome]),1]
+  
   hospital
 
   
